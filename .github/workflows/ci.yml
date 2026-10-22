@@ -27,12 +27,18 @@ jobs:
         with:
           path: ~/.cache/ms-playwright
           key: playwright-${{ runner.os }}-${{ steps.playwright-version.outputs.version }}
-      # The apt and browser downloads sometimes stall on a runner, so give each attempt 4 minutes and retry.
+      # A stalled apt download used to hang this job, and its root-owned process can't be killed from here
+      # (so a plain `timeout` just leaves the dpkg lock held). Make apt give up on stalled downloads,
+      # retry them, and wait for the lock instead of failing.
+      - name: Make apt fail fast on stalled downloads
+        run: |
+          printf '%s\n' 'Acquire::Retries "3";' 'Acquire::http::Timeout "30";' 'Acquire::https::Timeout "30";' 'DPkg::Lock::Timeout "120";' | sudo tee /etc/apt/apt.conf.d/99-ci-timeouts > /dev/null
       - name: Install browsers and system libraries
         run: |
           for attempt in 1 2 3; do
-            if timeout 4m npx playwright install --with-deps chromium firefox webkit; then exit 0; fi
-            echo "Attempt $attempt failed or timed out."
+            if npx playwright install --with-deps chromium firefox webkit; then exit 0; fi
+            echo "Attempt $attempt failed."
+            sleep 15
           done
           exit 1
       - run: npm run test:e2e
