@@ -1,6 +1,13 @@
 # Changelog
 
-## 0.1.0 (unreleased)
+## 0.1.1 (unreleased)
+
+No changes to the library. This release also checks the automated publishing setup.
+
+- Live demo page on GitHub Pages, with a favicon.
+- CI: job timeouts, and cached Playwright browser downloads.
+
+## 0.1.0 (2026-10-22)
 
 First release: a modern alternative to AOS with the same animations and options (from AOS 2.3.4 and 3.0.0-beta).
 
