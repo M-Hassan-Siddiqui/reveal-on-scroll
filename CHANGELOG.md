@@ -5,7 +5,7 @@
 No changes to the library. This release also checks the automated publishing setup.
 
 - Live demo page on GitHub Pages, with a favicon.
-- CI: job timeouts, and cached Playwright browser downloads.
+- CI: job timeouts, cached Playwright browser downloads, and a retry when the browser install stalls.
 
 ## 0.1.0 (2026-10-22)
 
