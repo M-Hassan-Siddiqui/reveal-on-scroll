@@ -1,0 +1,260 @@
+/* Black and white only. Hierarchy comes from size, weight, case and inversion. */
+:root {
+  --black: #000;
+  --white: #fff;
+  --sans: 'Segoe UI Variable Display', 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --mono: ui-monospace, 'Cascadia Mono', 'SF Mono', Menlo, Consolas, monospace;
+  --pad: clamp(1.25rem, 4vw, 3.5rem);
+  --bar: 2.6rem;
+  color-scheme: light;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--white);
+  color: var(--black);
+}
+
+body {
+  margin: 0;
+  font: 400 1rem/1.5 var(--sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--black);
+  color: var(--white);
+}
+
+code {
+  font-family: var(--mono);
+  font-size: 0.9em;
+}
+
+.bar,
+.index,
+footer .meta {
+  font: 500 0.72rem/1.3 var(--mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Top bar, with the live event readout on the right */
+.bar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 1rem;
+  height: var(--bar);
+  padding: 0 var(--pad);
+  border-bottom: 1px solid var(--black);
+  background: var(--white);
+  color: var(--black);
+}
+
+.log {
+  justify-self: end;
+  white-space: pre;
+}
+
+/* Hero */
+.hero {
+  min-height: calc(100svh - var(--bar));
+  display: grid;
+  grid-template-rows: 1fr auto;
+  gap: 3rem;
+  padding: var(--pad);
+}
+
+.hero h1 {
+  align-self: end;
+  margin: 0;
+  font-size: clamp(4.5rem, 15.5vw, 15rem);
+  font-weight: 700;
+  line-height: 0.82;
+  letter-spacing: -0.065em;
+}
+
+/* Transforms need a box, not inline text. */
+.hero h1 span {
+  display: inline-block;
+}
+
+.hero-foot {
+  display: grid;
+  grid-template-columns: minmax(0, 27rem) auto;
+  gap: 2rem 3rem;
+  align-items: end;
+  justify-content: start;
+}
+
+.hero-foot p {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.install {
+  padding: 0.9rem 1.1rem;
+  background: var(--black);
+  color: var(--white);
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
+.install::before {
+  content: '$ ';
+}
+
+/* Sections */
+.block {
+  display: grid;
+  grid-template-columns: minmax(17rem, 1.15fr) 3fr;
+  gap: 2.5rem var(--pad);
+  padding: 5rem var(--pad) 6.5rem;
+  border-top: 1px solid var(--black);
+}
+
+.block-head {
+  position: sticky;
+  top: calc(var(--bar) + 2rem);
+  align-self: start;
+}
+
+.block h2 {
+  margin: 1.1rem 0 1.25rem;
+  font-size: clamp(2.75rem, 5vw, 4.75rem);
+  font-weight: 700;
+  line-height: 0.9;
+  letter-spacing: -0.055em;
+}
+
+.block-head p {
+  max-width: 21rem;
+  margin: 0 0 1.25rem;
+}
+
+.attr {
+  display: inline-block;
+  padding: 0.35rem 0.55rem;
+  border: 1px solid currentColor;
+  font-size: 0.8rem;
+}
+
+/* Each animation: the dashed slot marks the final position, the tile animates into it. */
+.tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(9.5rem, 1fr));
+  gap: 1rem;
+}
+
+.slot {
+  position: relative;
+  aspect-ratio: 1;
+  border: 1px dashed currentColor;
+}
+
+.slot.clip {
+  overflow: hidden;
+}
+
+.tile {
+  position: absolute;
+  inset: -1px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0.85rem;
+  background: var(--black);
+  color: var(--white);
+  font: 500 0.72rem/1.3 var(--mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.tile strong {
+  font: 600 1.05rem/1.15 var(--sans);
+  letter-spacing: -0.01em;
+  text-transform: none;
+}
+
+/* Inverted section */
+.invert {
+  background: var(--black);
+  color: var(--white);
+}
+
+.invert .tile {
+  background: var(--white);
+  color: var(--black);
+}
+
+/* Footer */
+footer {
+  display: grid;
+  gap: 4rem;
+  padding: 7rem var(--pad) 2rem;
+  border-top: 1px solid var(--white);
+  background: var(--black);
+  color: var(--white);
+}
+
+footer .big {
+  margin: 0;
+  font-size: clamp(2.75rem, 9vw, 8.5rem);
+  font-weight: 700;
+  line-height: 0.88;
+  letter-spacing: -0.055em;
+}
+
+footer .meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+@media (max-width: 760px) {
+  .bar {
+    grid-template-columns: 1fr auto;
+  }
+
+  .bar :nth-child(2) {
+    display: none;
+  }
+
+  .hero {
+    min-height: auto;
+    padding-top: 22vh;
+  }
+
+  .hero-foot {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .install {
+    justify-self: start;
+  }
+
+  .block {
+    grid-template-columns: 1fr;
+    padding: 4rem var(--pad) 5rem;
+  }
+
+  .block-head {
+    position: static;
+  }
+
+  .tiles {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

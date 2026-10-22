@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>reveal-on-scroll test page</title>
+    <link rel="stylesheet" href="/dist/reveal-on-scroll.css" />
+    <style>
+      body {
+        margin: 0;
+        font: 16px/1.4 system-ui, sans-serif;
+      }
+      .box {
+        height: 200px;
+        margin: 40px;
+        background: #4f46e5;
+        color: #fff;
+      }
+      .spacer {
+        height: 1500px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="top" class="box" data-ros="fade-up">In view on load</div>
+    <div class="spacer"></div>
+    <div id="below" class="box" data-ros="fade-up">Below the fold</div>
+    <div id="once" class="box" data-ros="fade" data-ros-once="true">Once</div>
+    <div class="spacer"></div>
+    <div id="mirror" class="box" data-ros="zoom-in" data-ros-mirror="true">Mirror</div>
+    <div class="spacer"></div>
+    <div id="scrub" class="box" data-ros="fade-up" data-ros-scrub>Scrub</div>
+    <div class="spacer"></div>
+
+    <script src="/dist/reveal-on-scroll.js"></script>
+    <script>
+      window.rosEvents = [];
+      document.addEventListener('ros:in', (event) => window.rosEvents.push(['in', event.detail.id]));
+      document.addEventListener('ros:out', (event) => window.rosEvents.push(['out', event.detail.id]));
+      ROS.init();
+    </script>
+  </body>
+</html>

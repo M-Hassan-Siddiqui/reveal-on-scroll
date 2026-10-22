@@ -1,0 +1,71 @@
+{
+  "name": "reveal-on-scroll",
+  "version": "0.1.0",
+  "description": "Reveal elements as you scroll. A tiny, modern alternative to AOS with the same animations and options: typed, accessible and maintained.",
+  "keywords": [
+    "reveal on scroll",
+    "scroll animation",
+    "animate on scroll",
+    "aos alternative",
+    "scroll reveal",
+    "animation",
+    "scroll-driven animations",
+    "reduced motion",
+    "vanilla"
+  ],
+  "license": "MIT",
+  "author": "Muhammad Hassan Siddiqui <hassansiddiqui2k4@gmail.com> (https://github.com/M-Hassan-Siddiqui)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/M-Hassan-Siddiqui/reveal-on-scroll.git"
+  },
+  "homepage": "https://github.com/M-Hassan-Siddiqui/reveal-on-scroll#readme",
+  "bugs": "https://github.com/M-Hassan-Siddiqui/reveal-on-scroll/issues",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "unpkg": "./dist/reveal-on-scroll.js",
+  "jsdelivr": "./dist/reveal-on-scroll.js",
+  "style": "./dist/reveal-on-scroll.css",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./style.css": {
+      "types": "./dist/style.css.d.ts",
+      "default": "./dist/reveal-on-scroll.css"
+    },
+    "./dist/reveal-on-scroll.css": {
+      "types": "./dist/style.css.d.ts",
+      "default": "./dist/reveal-on-scroll.css"
+    },
+    "./dist/reveal-on-scroll.js": "./dist/reveal-on-scroll.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "scripts": {
+    "dev": "vite --open /demo/",
+    "build": "vite build && tsc -p tsconfig.build.json",
+    "size": "node scripts/size.mjs",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "npm run build && playwright test",
+    "prepublishOnly": "npm run typecheck && npm test && npm run build"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.64.1",
+    "@types/node": "^26.6.5",
+    "happy-dom": "^21.0.4",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.5",
+    "vitest": "^5.0.5"
+  }
+}

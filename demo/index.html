@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>reveal-on-scroll</title>
+    <link rel="stylesheet" href="/src/style.css" />
+    <link rel="stylesheet" href="./demo.css" />
+  </head>
+  <body>
+    <header class="bar">
+      <span>reveal-on-scroll</span>
+      <span>v0.1.0 — MIT</span>
+      <output class="log" aria-live="polite">ros:in —</output>
+    </header>
+
+    <section class="hero">
+      <h1>
+        <span data-ros="fade-up">Reveal</span>
+        <span data-ros="fade-up" data-ros-delay="90">on</span>
+        <span data-ros="fade-up" data-ros-delay="180">scroll.</span>
+      </h1>
+      <!-- Offset 0: these sit near the bottom of the first screen and should show right away. -->
+      <div class="hero-foot">
+        <p data-ros="fade" data-ros-delay="350" data-ros-offset="0">
+          Elements animate in as they reach the screen. 3.6 kB, typed, no dependencies, and it respects
+          reduced motion.
+        </p>
+        <code class="install" data-ros="fade" data-ros-delay="450" data-ros-offset="0">npm install reveal-on-scroll</code>
+      </div>
+    </section>
+
+    <main>
+      <section class="block">
+        <div class="block-head">
+          <span class="index">01 / 06</span>
+          <h2>Fade</h2>
+          <p>Fades in, with an optional 100&nbsp;px move.</p>
+          <code class="attr">data-ros="fade-up"</code>
+        </div>
+        <div class="tiles">
+          <div class="slot"><div class="tile" data-ros="fade"><span>01</span><strong>fade</strong></div></div>
+          <div class="slot"><div class="tile" data-ros="fade-up"><span>02</span><strong>fade-up</strong></div></div>
+          <div class="slot"><div class="tile" data-ros="fade-down"><span>03</span><strong>fade-down</strong></div></div>
+          <div class="slot"><div class="tile" data-ros="fade-left"><span>04</span><strong>fade-left</strong></div></div>
+          <div class="slot"><div class="tile" data-ros="fade-right"><span>05</span><strong>fade-right</strong></div></div>
+          <div class="slot"><div class="tile" data-ros="fade-up-right"><span>06</span><strong>fade-up-right</strong></div></div>
+          <div class="slot"><div class="tile" data-ros="fade-up-left"><span>07</span><strong>fade-up-left</strong></div></div>
+          <div class="slot"><div class="tile" data-ros="fade-down-right"><span>08</span><strong>fade-down-right</strong></div></div>
+          <div class="slot"><div class="tile" data-ros="fade-down-left"><span>09</span><strong>fade-down-left</strong></div></div>
+        </div>
+      </section>
+
+      <section class="block">
+        <div class="block-head">
+          <span class="index">02 / 06</span>
+          <h2>Zoom</h2>
+          <p>Scales from 60% or 120% while fading in.</p>
+          <code class="attr">data-ros="zoom-in"</code>
+        </div>
+        <div class="tiles">
+          <div class="slot"><div class="tile" data-ros="zoom-in"><span>01</span><strong>zoom-in</strong></div></div>
+          <div class="slot"><div class="tile" data-ros="zoom-in-up"><span>02</span><strong>zoom-in-up</strong></div></div>
+          <div class="slot"><div class="tile" data-ros="zoom-in-down"><span>03</span><strong>zoom-in-down</strong></div></div>
+          <div class="slot"><div class="tile" data-ros="zoom-in-left"><span>04</span><strong>zoom-in-left</strong></div></div>
+          <div class="slot"><div class="tile" data-ros="zoom-in-right"><span>05</span><strong>zoom-in-right</strong></div></div>
+          <div class="slot"><div class="tile" data-ros="zoom-out"><span>06</span><strong>zoom-out</strong></div></div>
+          <div class="slot"><div class="tile" data-ros="zoom-out-up"><span>07</span><strong>zoom-out-up</strong></div></div>
+          <div class="slot"><div class="tile" data-ros="zoom-out-down"><span>08</span><strong>zoom-out-down</strong></div></div>
+          <div class="slot"><div class="tile" data-ros="zoom-out-left"><span>09</span><strong>zoom-out-left</strong></div></div>
+          <div class="slot"><div class="tile" data-ros="zoom-out-right"><span>10</span><strong>zoom-out-right</strong></div></div>
+        </div>
+      </section>
+
+      <section class="block">
+        <div class="block-head">
+          <span class="index">03 / 06</span>
+          <h2>Flip</h2>
+          <p>Rotates into place around the horizontal or vertical axis.</p>
+          <code class="attr">data-ros="flip-left"</code>
+        </div>
+        <div class="tiles">
+          <div class="slot"><div class="tile" data-ros="flip-up"><span>01</span><strong>flip-up</strong></div></div>
+          <div class="slot"><div class="tile" data-ros="flip-down"><span>02</span><strong>flip-down</strong></div></div>
+          <div class="slot"><div class="tile" data-ros="flip-left"><span>03</span><strong>flip-left</strong></div></div>
+          <div class="slot"><div class="tile" data-ros="flip-right"><span>04</span><strong>flip-right</strong></div></div>
+        </div>
+      </section>
+
+      <section class="block">
+        <div class="block-head">
+          <span class="index">04 / 06</span>
+          <h2>Slide</h2>
+          <p>Moves in by its own size. Here each one sits in a box with <code>overflow: hidden</code>.</p>
+          <code class="attr">data-ros="slide-up"</code>
+        </div>
+        <div class="tiles">
+          <div class="slot clip"><div class="tile" data-ros="slide-up"><span>01</span><strong>slide-up</strong></div></div>
+          <div class="slot clip"><div class="tile" data-ros="slide-down"><span>02</span><strong>slide-down</strong></div></div>
+          <div class="slot clip"><div class="tile" data-ros="slide-left"><span>03</span><strong>slide-left</strong></div></div>
+          <div class="slot clip"><div class="tile" data-ros="slide-right"><span>04</span><strong>slide-right</strong></div></div>
+        </div>
+      </section>
+
+      <section class="block">
+        <div class="block-head">
+          <span class="index">05 / 06</span>
+          <h2>Options</h2>
+          <p>Set any option on one element, or for the whole page in <code>ROS.init()</code>.</p>
+          <code class="attr">data-ros-delay="150"</code>
+        </div>
+        <div class="tiles">
+          <div class="slot"><div class="tile" data-ros="fade-up" data-ros-delay="0"><span>delay</span><strong>0 ms</strong></div></div>
+          <div class="slot"><div class="tile" data-ros="fade-up" data-ros-delay="150"><span>delay</span><strong>150 ms</strong></div></div>
+          <div class="slot"><div class="tile" data-ros="fade-up" data-ros-delay="300"><span>delay</span><strong>300 ms</strong></div></div>
+          <div class="slot"><div class="tile" data-ros="fade-up" data-ros-duration="1500"><span>duration</span><strong>1500 ms</strong></div></div>
+          <div class="slot"><div class="tile" data-ros="fade-up" data-ros-easing="ease-out-back"><span>easing</span><strong>ease-out-back</strong></div></div>
+          <div class="slot"><div class="tile" data-ros="fade-up" data-ros-easing="cubic-bezier(.2, .8, .2, 1)"><span>easing</span><strong>any CSS curve</strong></div></div>
+          <div class="slot"><div class="tile" data-ros="fade-up" data-ros-anchor-placement="center-center"><span>anchor-placement</span><strong>center-center</strong></div></div>
+          <div class="slot"><div class="tile" data-ros="zoom-in" data-ros-once="true"><span>once</span><strong>only the first time</strong></div></div>
+          <div class="slot"><div class="tile" data-ros="zoom-in" data-ros-mirror="true"><span>mirror</span><strong>out through the top</strong></div></div>
+        </div>
+      </section>
+
+      <section class="block invert">
+        <div class="block-head">
+          <span class="index">06 / 06</span>
+          <h2>Scrubbed</h2>
+          <p>
+            With <code>data-ros-scrub</code> the animation follows the scroll position, driven by the
+            browser itself. <span id="scrub-support"></span>
+          </p>
+          <code class="attr">data-ros-scrub</code>
+        </div>
+        <div class="tiles">
+          <div class="slot"><div class="tile" data-ros="fade-up" data-ros-scrub><span>01</span><strong>fade-up</strong></div></div>
+          <div class="slot"><div class="tile" data-ros="zoom-in" data-ros-scrub><span>02</span><strong>zoom-in</strong></div></div>
+          <div class="slot"><div class="tile" data-ros="flip-left" data-ros-scrub><span>03</span><strong>flip-left</strong></div></div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p class="big" data-ros="fade-up">npm install<br />reveal-on-scroll</p>
+      <div class="meta">
+        <span>Turn on “reduce motion” in your system settings: everything fades instead of moving.</span>
+        <span>MIT · Animation names follow AOS by Michał Sajnóg</span>
+      </div>
+    </footer>
+
+    <script type="module">
+      import ROS from '/src/index.ts';
+
+      // Listen before init(): elements already in view animate (and fire ros:in) right away.
+      const log = document.querySelector('.log');
+      let count = 0;
+      document.addEventListener('ros:in', ({ detail }) => {
+        log.textContent = `ros:in  ${detail.getAttribute('data-ros')}  ${String(++count).padStart(3, '0')}`;
+      });
+
+      ROS.init();
+
+      document.querySelector('#scrub-support').textContent = CSS.supports('animation-timeline: view()')
+        ? 'Your browser supports it.'
+        : 'Your browser doesn’t support it yet, so these use the normal animation.';
+    </script>
+  </body>
+</html>

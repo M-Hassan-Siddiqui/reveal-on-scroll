@@ -1,0 +1,153 @@
+/*!
+ * reveal-on-scroll | MIT License
+ * Animation names and values follow AOS by Michał Sajnóg (MIT): https://github.com/michalsnik/aos
+ */
+
+/* Start states, kept in custom properties so the normal and the scroll-scrubbed mode share them. */
+[data-ros] {
+  --ros-opacity: 1;
+  --ros-transform: none;
+  --ros-transform-end: none;
+}
+
+[data-ros^='fade'],
+[data-ros^='zoom'] {
+  --ros-opacity: 0;
+}
+
+[data-ros='fade-up'] { --ros-transform: translate3d(0, 100px, 0); }
+[data-ros='fade-down'] { --ros-transform: translate3d(0, -100px, 0); }
+[data-ros='fade-right'] { --ros-transform: translate3d(-100px, 0, 0); }
+[data-ros='fade-left'] { --ros-transform: translate3d(100px, 0, 0); }
+[data-ros='fade-up-right'] { --ros-transform: translate3d(-100px, 100px, 0); }
+[data-ros='fade-up-left'] { --ros-transform: translate3d(100px, 100px, 0); }
+[data-ros='fade-down-right'] { --ros-transform: translate3d(-100px, -100px, 0); }
+[data-ros='fade-down-left'] { --ros-transform: translate3d(100px, -100px, 0); }
+
+[data-ros='zoom-in'] { --ros-transform: scale(0.6); }
+[data-ros='zoom-in-up'] { --ros-transform: translate3d(0, 100px, 0) scale(0.6); }
+[data-ros='zoom-in-down'] { --ros-transform: translate3d(0, -100px, 0) scale(0.6); }
+[data-ros='zoom-in-right'] { --ros-transform: translate3d(-100px, 0, 0) scale(0.6); }
+[data-ros='zoom-in-left'] { --ros-transform: translate3d(100px, 0, 0) scale(0.6); }
+[data-ros='zoom-out'] { --ros-transform: scale(1.2); }
+[data-ros='zoom-out-up'] { --ros-transform: translate3d(0, 100px, 0) scale(1.2); }
+[data-ros='zoom-out-down'] { --ros-transform: translate3d(0, -100px, 0) scale(1.2); }
+[data-ros='zoom-out-right'] { --ros-transform: translate3d(-100px, 0, 0) scale(1.2); }
+[data-ros='zoom-out-left'] { --ros-transform: translate3d(100px, 0, 0) scale(1.2); }
+
+[data-ros='slide-up'] { --ros-transform: translate3d(0, 100%, 0); }
+[data-ros='slide-down'] { --ros-transform: translate3d(0, -100%, 0); }
+[data-ros='slide-right'] { --ros-transform: translate3d(-100%, 0, 0); }
+[data-ros='slide-left'] { --ros-transform: translate3d(100%, 0, 0); }
+
+/* Flips keep their perspective at the end so they rotate exactly like AOS. */
+[data-ros='flip-left'] {
+  --ros-transform: perspective(2500px) rotateY(-100deg);
+  --ros-transform-end: perspective(2500px) rotateY(0);
+}
+[data-ros='flip-right'] {
+  --ros-transform: perspective(2500px) rotateY(100deg);
+  --ros-transform-end: perspective(2500px) rotateY(0);
+}
+[data-ros='flip-up'] {
+  --ros-transform: perspective(2500px) rotateX(-100deg);
+  --ros-transform-end: perspective(2500px) rotateX(0);
+}
+[data-ros='flip-down'] {
+  --ros-transform: perspective(2500px) rotateX(100deg);
+  --ros-transform-end: perspective(2500px) rotateX(0);
+}
+
+/* Reduced motion: nothing moves, every animation becomes a fade. */
+@media (prefers-reduced-motion: reduce) {
+  [data-ros][data-ros] {
+    --ros-opacity: 0;
+    --ros-transform: none;
+    --ros-transform-end: none;
+  }
+}
+
+/* Timing. The script sets these properties on each element from its options. */
+[data-ros] {
+  transition-duration: var(--ros-duration, 400ms);
+  transition-timing-function: var(--ros-easing, ease);
+  transition-delay: 0s;
+}
+
+[data-ros].ros-animate {
+  transition-delay: var(--ros-delay, 0s);
+}
+
+/* Hidden until animated, only when scripting is on, so pages stay readable without JavaScript. */
+@media (scripting: enabled) {
+  :is([data-ros^='fade'], [data-ros^='zoom'], [data-ros^='slide'], [data-ros^='flip']) {
+    transition-property: opacity, transform, visibility;
+  }
+
+  :is([data-ros^='fade'], [data-ros^='zoom'], [data-ros^='slide'], [data-ros^='flip']):not(.ros-animate) {
+    opacity: var(--ros-opacity);
+    transform: var(--ros-transform);
+  }
+
+  [data-ros^='flip'].ros-animate {
+    transform: var(--ros-transform-end);
+  }
+
+  /* Hidden elements can't be clicked. */
+  :root[data-ros-ready]
+    :is([data-ros^='fade'], [data-ros^='zoom'], [data-ros^='slide'], [data-ros^='flip']):not(.ros-animate) {
+    pointer-events: none;
+  }
+
+  /* If the script never starts (blocked or failed to load), show the content anyway. */
+  :root:not([data-ros-ready]) :is([data-ros^='fade'], [data-ros^='zoom'], [data-ros^='slide'], [data-ros^='flip']) {
+    animation: ros-failsafe 0s var(--ros-failsafe-delay, 3s) forwards;
+  }
+}
+
+@media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
+  [data-ros^='slide']:not(.ros-animate) {
+    visibility: hidden;
+  }
+
+  [data-ros^='flip'] {
+    backface-visibility: hidden;
+  }
+}
+
+/*
+ * Scroll-scrubbed mode (`data-ros-scrub`): progress follows the scroll position, driven by
+ * the browser's native scroll-driven animations. Without support it falls back to the
+ * normal animation. Must come after the failsafe rule, which has the same specificity.
+ */
+@supports (animation-timeline: view()) {
+  @media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
+    :root [data-ros][data-ros-scrub] {
+      transition: none;
+      animation: ros-scrub linear both;
+      /* After the shorthand, which would reset it. */
+      animation-timeline: view();
+      animation-range: var(--ros-scrub-range, entry 10% cover 45%);
+    }
+  }
+}
+
+@keyframes ros-failsafe {
+  to {
+    opacity: 1;
+    transform: var(--ros-transform-end);
+    visibility: visible;
+  }
+}
+
+@keyframes ros-scrub {
+  from {
+    opacity: var(--ros-opacity);
+    transform: var(--ros-transform);
+  }
+  to {
+    opacity: 1;
+    transform: var(--ros-transform-end);
+    visibility: visible;
+  }
+}
