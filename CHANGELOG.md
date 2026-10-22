@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.1.1 (unreleased)
+## 0.1.1 (2026-10-22)
 
 No changes to the library. This release also checks the automated publishing setup.
 
