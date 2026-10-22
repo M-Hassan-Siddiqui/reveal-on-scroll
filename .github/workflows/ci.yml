@@ -8,6 +8,8 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    # A hung browser download or apt step fails after 15 minutes instead of running for hours.
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-node@v5
@@ -18,5 +20,25 @@ jobs:
       - run: npm run typecheck
       - run: npm test
       # Browser tests run in Chromium, Firefox and WebKit (Safari's engine).
-      - run: npx playwright install --with-deps chromium firefox webkit
+      # The browser downloads are cached per Playwright version; `install` skips browsers already in the cache.
+      - id: playwright-version
+        run: echo "version=$(node -p "require('@playwright/test/package.json').version")" >> "$GITHUB_OUTPUT"
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ steps.playwright-version.outputs.version }}
+      # A stalled apt download used to hang this job, and its root-owned process can't be killed from here
+      # (so a plain `timeout` just leaves the dpkg lock held). Make apt give up on stalled downloads,
+      # retry them, and wait for the lock instead of failing.
+      - name: Make apt fail fast on stalled downloads
+        run: |
+          printf '%s\n' 'Acquire::Retries "3";' 'Acquire::http::Timeout "30";' 'Acquire::https::Timeout "30";' 'DPkg::Lock::Timeout "120";' | sudo tee /etc/apt/apt.conf.d/99-ci-timeouts > /dev/null
+      - name: Install browsers and system libraries
+        run: |
+          for attempt in 1 2 3; do
+            if npx playwright install --with-deps chromium firefox webkit; then exit 0; fi
+            echo "Attempt $attempt failed."
+            sleep 15
+          done
+          exit 1
       - run: npm run test:e2e
