@@ -3,6 +3,8 @@
 Reveal elements as you scroll. A tiny, modern alternative to [AOS (Animate On Scroll)](https://github.com/michalsnik/aos) with the same animations and options.
 It's typed, half the size, and respects reduced motion.
 
+**[Live demo](https://m-hassan-siddiqui.github.io/reveal-on-scroll/)**
+
 ```html
 <div data-ros="fade-up">I fade in when you scroll to me.</div>
 ```

@@ -53,6 +53,7 @@
   "scripts": {
     "dev": "vite --open /demo/",
     "build": "vite build && tsc -p tsconfig.build.json",
+    "build:demo": "vite build --config vite.demo.config.ts",
     "size": "node scripts/size.mjs",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
