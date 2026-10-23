@@ -11,7 +11,9 @@
     "animation",
     "scroll-driven animations",
     "reduced motion",
-    "vanilla"
+    "vanilla",
+    "aos",
+    "typescript"
   ],
   "license": "MIT",
   "author": "Muhammad Hassan Siddiqui <hassansiddiqui2k4@gmail.com> (https://github.com/M-Hassan-Siddiqui)",
@@ -19,7 +21,7 @@
     "type": "git",
     "url": "git+https://github.com/M-Hassan-Siddiqui/reveal-on-scroll.git"
   },
-  "homepage": "https://github.com/M-Hassan-Siddiqui/reveal-on-scroll#readme",
+  "homepage": "https://m-hassan-siddiqui.github.io/reveal-on-scroll/",
   "bugs": "https://github.com/M-Hassan-Siddiqui/reveal-on-scroll/issues",
   "type": "module",
   "main": "./dist/index.js",

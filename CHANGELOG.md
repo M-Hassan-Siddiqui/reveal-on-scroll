@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.2 (unreleased)
+
+No changes to the library. Documentation and metadata only, so the npm page links to the demo and the repo links back to npm.
+
+- README: badges, plus links to the npm package, the live demo, the changelog and the issue tracker.
+- npm metadata: the homepage now points to the live demo; added the keywords `aos` and `typescript`.
+- Demo page: search and sharing metadata (description, canonical URL, Open Graph).
+
 ## 0.1.1 (2026-10-22)
 
 No changes to the library. This release also checks the automated publishing setup.
