@@ -3,7 +3,12 @@
 Reveal elements as you scroll. A tiny, modern alternative to [AOS (Animate On Scroll)](https://github.com/michalsnik/aos) with the same animations and options.
 It's typed, half the size, and respects reduced motion.
 
-**[Live demo](https://m-hassan-siddiqui.github.io/reveal-on-scroll/)**
+[![npm version](https://img.shields.io/npm/v/reveal-on-scroll)](https://www.npmjs.com/package/reveal-on-scroll)
+[![npm downloads per week](https://img.shields.io/npm/dw/reveal-on-scroll)](https://www.npmjs.com/package/reveal-on-scroll)
+[![CI](https://github.com/M-Hassan-Siddiqui/reveal-on-scroll/actions/workflows/ci.yml/badge.svg)](https://github.com/M-Hassan-Siddiqui/reveal-on-scroll/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/npm/l/reveal-on-scroll)](https://github.com/M-Hassan-Siddiqui/reveal-on-scroll/blob/main/LICENSE)
+
+**[npm package](https://www.npmjs.com/package/reveal-on-scroll)** · **[Live demo](https://m-hassan-siddiqui.github.io/reveal-on-scroll/)** · [Changelog](https://github.com/M-Hassan-Siddiqui/reveal-on-scroll/blob/main/CHANGELOG.md) · [Report an issue](https://github.com/M-Hassan-Siddiqui/reveal-on-scroll/issues)
 
 ```html
 <div data-ros="fade-up">I fade in when you scroll to me.</div>
