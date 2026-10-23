@@ -1,6 +1,6 @@
 {
   "name": "reveal-on-scroll",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Reveal elements as you scroll. A tiny, modern alternative to AOS with the same animations and options: typed, accessible and maintained.",
   "keywords": [
     "reveal on scroll",

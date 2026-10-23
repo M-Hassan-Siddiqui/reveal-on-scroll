@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.1.2 (unreleased)
+## 0.1.2 (2026-10-23)
 
 No changes to the library. Documentation and metadata only, so the npm page links to the demo and the repo links back to npm.
 
